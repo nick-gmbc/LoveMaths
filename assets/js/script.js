@@ -16,10 +16,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-
+/**
+ * Run game
+ */
 function runGame() {
-
+    let num1 = Math.floor(Math.random()) + 1;
+    let num2 = Math.floor(Math.random()) + 1;
 }
+
+
 
 function checkAnswer() {
 
