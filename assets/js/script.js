@@ -44,8 +44,10 @@ function checkAnswer() {
     let isCorrect = (userAnswer === calculatedAnswer[0]);
 
     if (isCorrect) {
+        incrementScore();
         alert("You got in right");
     } else {
+        incrementWrongAnswer();
         alert(`You answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}`);
     }
 
@@ -66,12 +68,18 @@ function calculateCorrectAnswer() {
     }
 }
 
-function incrementScore() {
+/**
+ * 
+ */
 
+function incrementScore() {
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
 }
 
 function incrementWrongAnswer() {
-
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
 }
 
 function displayAdditionQuestion(operand1, operand2) {
