@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     }
 
+    document.getElementById("answer-box").addEventListener("keydown", function(event){
+        if (event.key == "Enter") {
+            checkAnswer();
+        }
+    })
+
     runGame("addition");
 })
 
@@ -22,6 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
  * Run game
  */
 function runGame(gameType) {
+
+    document.getElementById("answer-box").value = "";
+    document.getElementById("answer-box").focus();
+
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
 
@@ -34,8 +44,7 @@ function runGame(gameType) {
             if (gameType === "subtract") {
                 displaySubtractQuestion(num1, num2)
             } else {
-                alert(`Unknown game type ${gameType}`);
-                throw `Unknown game type ${gameType} aborting`;
+                displayMultiplyQuestion(num1, num2)
             }
         }
     }
@@ -77,8 +86,7 @@ function calculateCorrectAnswer() {
             if  (operator === "-") {
                 return [operand1 - operand2, "subtract"];
             } else {
-                alert(`Unimplemented Operator ${operator}`);
-                throw `Unimplemented Operator ${operator}`;
+                return [operand1 / operand2, "divide"];
             }
 
         }
@@ -122,4 +130,24 @@ function displayMultiplyQuestion(operand1, operand2) {
     document.getElementById("operand1").textContent = operand1;
     document.getElementById("operand2").textContent = operand2;
     document.getElementById("operator").textContent = "x";    
+}
+
+function isInteger(n) {
+    return n === Math.trunc(n);
+}
+
+function displayMultiplyQuestion(operand1, operand2) {
+    console.log(operand1, operand2);
+    if (operand1 < operand2) {
+        let temp = operand1;
+        operand2 = operand1;
+        operand1 = temp;
+    }
+    console.log(operand1, operand2);
+    while ( ! isInteger(operand1/operand2)) {
+        operand2 = operand2 - 1;
+    }
+    document.getElementById("operand1").textContent = operand1;
+    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operator").textContent = String.fromCharCode(247);   
 }
